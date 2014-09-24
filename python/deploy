@@ -1,6 +1,7 @@
 #!/bin/bash -el
 
 SOURCE_DIR=/var/lib/tsuru
+echo "*** $0: \${SOURCE_DIR} = \"${SOURCE_DIR}\""
 source ${SOURCE_DIR}/base/deploy
 
 source ${SOURCE_DIR}/config
@@ -8,7 +9,7 @@ source ${SOURCE_DIR}/config
 (
 	cd ${CURRENT_DIR}
 
-	echo "*************** About to do pip install (pwd: $(pwd)) ***************"
+	echo "*** $0: About to do pip install (pwd: $(pwd))"
 
 	if [ -f ${CURRENT_DIR}/requirements.txt ]; then
 		sudo pip install -r ${CURRENT_DIR}/requirements.txt
@@ -17,5 +18,6 @@ source ${SOURCE_DIR}/config
 	fi
 )
 
-echo "*********** Running any hooks in ${SOURCE_DIR}/hooks.py ***************"
+echo "*** $0: Running any hooks in ${SOURCE_DIR}/hooks.py (pwd: $(pwd))"
 /home/application/.venv/bin/python ${SOURCE_DIR}/hooks.py
+echo "*** $0: Done."
